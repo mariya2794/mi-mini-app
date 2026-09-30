@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись на консультацию</title>
+    <!-- Стиль формы -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa; /* Светлый фон */
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type=date], select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            box-shadow: none;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #0069d9; /* Синий цвет кнопки */
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Запись на консультацию к психологу [Ваша фамилия]</h2>
+    
+    <label for="date">Выберите дату:</label>
+    <input type="date" id="date" required>
+
+    <label for="time">Выберите время:</label>
+    <select id="time" required>
+        <option value="">-- Выберите --</option>
+        <option value="10:00–11:00">10:00 – 11:00</option>
+        <option value="12:00–13:00">12:00 – 13:00</option>
+        <option value="16:00–17:00">16:00 – 17:00</option>
+        <option value="18:00–19:00">18:00 – 19:00</option>
+    </select>
+
+    <button onclick="sendData()">Отправить заявку</button>
+
+    <p><small>*После отправки данных я свяжусь с вами для подтверждения.</small></p>
+</div>
+
+<script>
+function sendData() {
+    // Получаем выбранную дату и время из полей
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+
+    if (!date || !time) return alert("Пожалуйста, заполните все поля.");
+
+    // Формируем сообщение для бота
+    let message = "Новая заявка:\nДата: " + date + "\nВремя: " + time;
+
+    // Отправляем сообщение пользователю обратно в чат
+    window.location.href = 'max://send?text=' + encodeURIComponent(message);
+}
+</script>
+</body>
+</html>
